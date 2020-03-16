@@ -126,14 +126,17 @@ client.on('message', (message) => {
             if (message.content.startsWith(state.cmdToken)) {
                 handleCommand(message);
             }
-            else if (state.isChannelActive(message.channel) && !state.isUserBanned(message.author)) {
-                obfuscateMessage(message);
-            }
-            else {
-                if (message.author.dmChannel) {
-                message.author.dmChannel.send("You have been banned from using the veil")
+            else if (state.isChannelActive(message.channel)) {
+                if (state.isUserBanned(message.author)) {
+                    if (message.author.dmChannel) {
+                        message.author.dmChannel.send("You have been banned from using the veil")
+                    }
+                    message.delete();
+                } 
+                else {
+                    obfuscateMessage(message);
                 }
-                message.delete();
+                
             }
             
         }
