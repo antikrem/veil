@@ -34,8 +34,6 @@ Follow the Windows equivalent of Linux installation.
 
 ## Meta
 
-Chalinda Rodrigo – chalindarodrigo@gmail.com
+Chalinda Rodrigo – chalindarodrigo@gmail.com - [https://github.com/antikrem](https://github.com/antikrem/)
 
 Distributed under the Unlicense.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
