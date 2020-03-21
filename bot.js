@@ -160,6 +160,7 @@ client.on('error', () => {
 setInterval(
     function (){
         state.resetAllID();
+        console.log("All IDs have been reset")
     }, 
     state.resetTime * 60 * 60 * 1000
 );
