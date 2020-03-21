@@ -59,6 +59,7 @@ function obfuscateMessage(message) {
     // If there is a some text to post, send it
     if (textBody != "") {
         channel.send(textBody);
+        console.log(textBody)
     }   
 }
 
