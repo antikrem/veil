@@ -27,11 +27,15 @@ Follow the Windows equivalent of Linux installation.
 
 ## Release History
 * 0.2
+    * Added hourly update
+    * Added global maintenance message
+    * Added version and version query command
+* 0.2:
     * Updated console output
 * 0.1.1
     * FIX: Messages in other channels being deleted
-* 0.1.0
-    * Stable version reelase
+* 0.1.0:
+    * Stable version release
 
 ## Meta
 
