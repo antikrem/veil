@@ -63,6 +63,13 @@ function obfuscateMessage(message) {
     }   
 }
 
+// Writes a message to all active channels
+function writeMessageToAllChannels(messageString) {
+    for (var i = 0; i < state.activeChannels.length; i++) {
+        state.activeChannels[i].send(messageString)
+    }
+}
+
 // Handles a command message posted in a channe;
 function handleCommand(message) {
     let args = message.content.substr(1).split(" ");
@@ -74,20 +81,20 @@ function handleCommand(message) {
     console.log("idMod?: " + isMod);
     
     switch (cmd) {
-        case "add" :
+    case "add" :
         state.addChannel(message.channel);
         message.channel.send("The veil covers this channel")
         break;
 
-        case "changeid" :
+    case "changeid" :
         state.resetID(message.author);
         break;
 
-        case "changeallids" :
+    case "changeallids" :
         state.resetAllID();
         break;
 
-        case "ban" :
+    case "ban" :
         if (prm.length > 0 && isMod) {
             if (state.banUser(prm[0])) {
                 message.channel.send("User has been banned from posting")
@@ -97,8 +104,12 @@ function handleCommand(message) {
         }
         break;
 
-        case "bandump" :
+    case "bandump" :
         state.dumpAllBans();        
+        break;
+
+    case "maintenance":
+        writeMessageToAllChannels("Veil will be down for maintenance");
         break;
     }
 
@@ -110,7 +121,7 @@ function executeHourStateUpdate() {
     var currentHour = state.incrementHour();
     if (currentHour % state.resetTime == 0) {
         state.resetAllID();
-        console.log("All IDs have been reset")
+        console.log("All IDs have been reset");
     } 
 }
 
@@ -165,9 +176,10 @@ client.on('error', () => {
     console.log("An error event has occured");
 })
 
-// Timer to reset time every day
+// Executer for hourly update
 setInterval(
-    executeHourStateUpdate, 
+    executeHourStateUpdate,
+    // Length of hour in milliseconds
     60 * 60 * 1000
 );
 
