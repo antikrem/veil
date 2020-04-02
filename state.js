@@ -24,9 +24,6 @@ module.exports.imageUUIDToPoster = new Map();
 // Ties a user id to UUID
 module.exports.userToUUID = new Map();
 
-// Reset time in hours
-module.exports.resetTime = 24;
-
 // Generates a UUID, of 8 random letters (case-sensitive)
 function generateUUID() {
     var UUID = "";
@@ -140,3 +137,19 @@ function dumpAllBans() {
 }
 
 module.exports.dumpAllBans = dumpAllBans;
+
+// Timing system
+
+// Keeps a timer of number of hours since start of bot
+module.exports.hoursPassed = 0;
+
+// Reset time in hours
+module.exports.resetTime = 24;
+
+// Increments and returns new hour passed
+function incrementHour() {
+    module.exports.hoursPassed++;
+    return module.exports.hoursPassed;
+}
+
+module.exports.incrementHour = incrementHour;

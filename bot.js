@@ -105,9 +105,17 @@ function handleCommand(message) {
     message.delete();
 }
 
-const client = new Client()
+// Hourly state update
+function executeHourStateUpdate() {
+    var currentHour = state.incrementHour();
+    if (currentHour % state.resetTime == 0) {
+        state.resetAllID();
+        console.log("All IDs have been reset")
+    } 
+}
 
 // Event Handlers
+const client = new Client()
 
 // General event handler
 client.on('message', (message) => {
@@ -159,11 +167,8 @@ client.on('error', () => {
 
 // Timer to reset time every day
 setInterval(
-    function (){
-        state.resetAllID();
-        console.log("All IDs have been reset")
-    }, 
-    state.resetTime * 60 * 60 * 1000
+    executeHourStateUpdate, 
+    60 * 60 * 1000
 );
 
 client.login(state.getLoginToken())
