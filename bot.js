@@ -70,11 +70,7 @@ function obfuscateMessage(message) {
 function writeMessageToAllChannels(messageString) {
     for (var i = 0; i < state.activeChannels.length; i++) {
         // Try to get the channel via id
-        client.channels.fetch(state.activeChannels[i])
-            // If resolved just send message
-            .then(channel => channel.name.send(messageString))
-            // Otherwise, error
-            .catch(console.error("WARNING: writeMessageToAllChannels passed"));
+        client.channels.get(state.activeChannels[i]).send(messageString);
     }
 }
 
