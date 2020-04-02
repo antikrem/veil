@@ -84,36 +84,40 @@ function handleCommand(message) {
     console.log("idMod?: " + isMod);
     
     switch (cmd) {
-    case "add" :
-        state.addChannel(message.channel);
-        message.channel.send("The veil covers this channel")
-        break;
+        case "add" :
+            state.addChannel(message.channel);
+            message.channel.send("The veil covers this channel")
+            break;
 
-    case "changeid" :
-        state.resetID(message.author);
-        break;
+        case "changeid" :
+            state.resetID(message.author);
+            break;
 
-    case "changeallids" :
-        state.resetAllID();
-        break;
+        case "changeallids" :
+            state.resetAllID();
+            break;
 
-    case "ban" :
-        if (prm.length > 0 && isMod) {
-            if (state.banUser(prm[0])) {
-                message.channel.send("User has been banned from posting")
-            } else {
-                message.channel.send("UUID not found")
+        case "ban" :
+            if (prm.length > 0 && isMod) {
+                if (state.banUser(prm[0])) {
+                    message.channel.send("User has been banned from posting");
+                } else {
+                    message.channel.send("UUID not found");
+                }
             }
-        }
-        break;
+            break;
 
-    case "bandump" :
-        state.dumpAllBans();        
-        break;
+        case "bandump" :
+            state.dumpAllBans();        
+            break;
 
-    case "maintenance":
-        writeMessageToAllChannels("Veil will be down for maintenance");
-        break;
+        case "maintenance":
+            writeMessageToAllChannels("Veil will be down for maintenance");
+            break;
+
+        case "version":
+            message.channel.send("Version: " + version.VERSION_RELEASE + "." + version.VERSION_MAJOR + "." + version.VERSION_MINOR)
+            break;
     }
 
     message.delete();
