@@ -1,6 +1,9 @@
 
 // Stores the state of the bot, including lists of channels, banend users, e.g.
 var state = require("./state");
+// Import version number
+var version = require("./version");
+// Import discord api
 const { Client, MessageAttachment } = require('discord.js')
 
 // Functional components
