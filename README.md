@@ -26,6 +26,8 @@ Follow the Windows equivalent of Linux installation.
 4. Mods can ban using `%ban UUID`, where UUID is a user or image id to be banned.
 
 ## Release History
+* 0.2.2
+    * FIX: Crash on maintenace command
 * 0.2.1
     * Added hourly update
     * Added global maintenance message
