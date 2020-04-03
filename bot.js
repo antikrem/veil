@@ -174,14 +174,20 @@ client.on('message', (message) => {
 
 // Handles first load in
 client.on('ready', () => {
-    console.clear();
-    console.log("Connected as " + client.user.tag);
+    
+    if (state.isFirstConnect()) {
+        console.clear();
+        console.log("Connected as " + client.user.tag + "\n");
+    } else {
+        console.log("Reconnected as " + client.user.tag + "\n");
+    }
+    
 })
 
 // Handles an error event, usually
 // a small disconnect or internet interrupt
 client.on('error', () => {
-    console.log("An error event has occured");
+    console.log("An error event has occured\n");
 })
 
 // Executer for hourly update

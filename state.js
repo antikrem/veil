@@ -6,6 +6,18 @@
 
 var fs = require('fs');
 
+// Boolean value used to stop later connects clearing
+module.exports.firstConnect = true;
+
+// Returns if this is the first connect
+function isFirstConnect() {
+    var oldValue = module.exports.firstConnect;
+    module.exports.firstConnect = false;
+    return oldValue;
+}
+
+module.exports.isFirstConnect = isFirstConnect;
+
 // Token for commands
 module.exports.cmdToken = '%'
 
