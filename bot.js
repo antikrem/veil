@@ -117,7 +117,7 @@ function handleCommand(message) {
             break;
 
         case "version":
-            message.channel.send("Version: " + version.VERSION_RELEASE + "." + version.VERSION_MAJOR + "." + version.VERSION_MINOR)
+            message.channel.send("veil ultra: version: " + version.VERSION_RELEASE + "." + version.VERSION_MAJOR + "." + version.VERSION_MINOR)
             break;
     }
 
