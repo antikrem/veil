@@ -26,6 +26,8 @@ Follow the Windows equivalent of Linux installation.
 4. Mods can ban using `%ban UUID`, where UUID is a user or image id to be banned.
 
 ## Release History
+* 0.2.4
+    * Refactored message obfuscater to post into other channels
 * 0.2.3
     * Styled connection message to be different on reconnect
     * Updated version command

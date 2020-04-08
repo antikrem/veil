@@ -9,10 +9,11 @@ const { Client, MessageAttachment } = require('discord.js')
 // Functional components
 
 // Obfuscates a given message, deleting the original
-function obfuscateMessage(message) {
+// Message is the original message to be obfuscated
+// Channel is the channel to post the obfuscated message
+function obfuscateMessage(message, channel) {
     var embeds = message.embeds;
     var attachments = message.attachments.array();
-    var channel = message.channel
 
     console.log("\nObfuscation Begins:")
     console.log("attachments: " + message.attachments.size)
@@ -162,7 +163,7 @@ client.on('message', (message) => {
                     message.delete();
                 } 
                 else {
-                    obfuscateMessage(message);
+                    obfuscateMessage(message, message.channel);
                 }
                 
             }
