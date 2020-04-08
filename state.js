@@ -41,10 +41,10 @@ function generateUUID() {
     var UUID = "";
     for (var i = 0; i < 8; i++) {
         if (Math.random() < 0.5) {
-            UUID += String.fromCharCode(Math.floor(Math.random()*25+65));
+            UUID += String.fromCharCode(Math.floor(Math.random() * 25 + 65));
         } 
         else {
-            UUID += String.fromCharCode(Math.floor(Math.random()*25+97));
+            UUID += String.fromCharCode(Math.floor(Math.random() * 25 + 97));
         }
     }    
     return UUID;
