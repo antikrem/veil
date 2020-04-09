@@ -132,16 +132,16 @@ function handleChannelCommand(message) {
 
 // Handles a non-command dm to the bot
 function handleNonCommandDM(message) {
-    let proxyChannel = state.getUsersProxyChannel(message.user.id);
+    let proxyChannel = state.getUsersProxyChannel(message.author.id);
 
-    if (proxyChannel == null) {
+    if (proxyChannel) {
+        obfuscateMessage(message, proxyChannel);
+    }
+    else {
         message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
         for (var i = 0; i < state.activeChannels.length; i++) {
             message.channel.send("`" + i + "` : `" + client.channels.get(state.activeChannels[i]).name + "`");
         }
-    }
-    else {
-        obfuscateMessage(message, proxyChannel);
     }
 }
 
