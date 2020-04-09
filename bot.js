@@ -132,7 +132,7 @@ function handleChannelCommand(message) {
 
 // Handles a non-command dm to the bot
 function handleNonCommandDM(message) {
-    let proxyChannel = state.getUsersProxyChannel(message.user);
+    let proxyChannel = state.getUsersProxyChannel(message.user.id);
 
     if (proxyChannel) {
         obfuscateMessage(message, proxyChannel);
