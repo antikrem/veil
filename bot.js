@@ -157,14 +157,15 @@ function handleCommandDM(message) {
 
     switch (cmd) {
         case "proxy":
+            console.log("hello " + args.length)
             if (args.length == 1 ) {
-                console.length("length")
+                console.log("length")
             }
             if (helper.isNaturalNumber(args[0])) {
-                console.length("nn")
+                console.log("nn")
             }
             if (Number(args[0]) < state.activeChannels.length) {
-                console.length("lengy")
+                console.log("lengy")
             }
             if (args.length == 1 && helper.isNaturalNumber(args[0]) && Number(args[0]) < state.activeChannels.length) {
                 state.usersProxyChannel.set(message.author.id, state.activeChannels[Number(args[0])]);
