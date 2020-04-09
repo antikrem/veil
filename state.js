@@ -165,3 +165,25 @@ function incrementHour() {
 }
 
 module.exports.incrementHour = incrementHour;
+
+// Stores a map of user.id to channel.id to post to 
+module.exports.userProxy = new Map();
+
+// Increments and returns new hour passed
+function get() {
+    module.exports.hoursPassed++;
+    return module.exports.hoursPassed;
+}
+
+module.exports.incrementHour = incrementHour;
+
+// Ties a user id to proxy channel id
+module.exports.usersProxyChannel = new Map();
+
+// Returns channel id if user has proxy channe;
+// otherwise returns null
+function getUsersProxyChannel(userID) {
+    if (module.exports.usersProxyChannel.has(userID)) {
+        return module.exports.usersProxyChannel.get(userID);
+    }
+}

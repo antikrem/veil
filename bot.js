@@ -1,8 +1,13 @@
 
 // Stores the state of the bot, including lists of channels, banend users, e.g.
 var state = require("./state");
+
 // Import version number
 var version = require("./version");
+
+// Import version number
+var helper = require("./helper");
+
 // Import discord api
 const { Client, MessageAttachment } = require('discord.js')
 
@@ -75,8 +80,8 @@ function writeMessageToAllChannels(messageString) {
     }
 }
 
-// Handles a command message posted in a channe;
-function handleCommand(message) {
+// Handles a command message posted in a channel
+function handleChannelCommand(message) {
     let args = message.content.substr(1).split(" ");
     let cmd = args[0].toLowerCase();
     let prm = args.slice(1);
@@ -125,6 +130,60 @@ function handleCommand(message) {
     message.delete();
 }
 
+// Handles a non-command dm to the bot
+function handleNonCommandDM(message) {
+    let proxyChannel = state.getUsersProxyChannel(message.user);
+
+    if (proxyChannel) {
+        obfuscateMessage(message, proxyChannel);
+    }
+    else {
+        message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
+        for (var i = 0; i < state.activeChannels.length; i++) {
+            message.channel.send("`" + i + "` : `" + client.channels.get(state.activeChannels[i]).name + "`");
+        }
+    }
+}
+
+// Handles a dm command meesage to the bot
+function handleCommandDM(message) {
+    let args = message.content.substr(1).split(" ");
+    let cmd = args[0].toLowerCase();
+    let prm = args.slice(1);
+    let isMod = state.isUserMod(message.author);
+
+    console.log("DM Cmd recieved: " + args);
+    console.log("idMod?: " + isMod);
+
+    switch (cmd) {
+        case "proxy":
+            if (args.length == 1 && helper.isNaturalNumber(args[0]) && Number(args[0]) < state.activeChannels.length) {
+                state.usersProxyChannel.set(message.author.id, state.activeChannels[Number(args[0])]);
+            }
+            else {
+                message.channel.send("Invalid selection");
+            }
+
+        case "changeid":
+            state.resetID(message.author);
+            break;
+
+        case "changeallids":
+            state.resetAllID();
+            break;
+
+        case "maintenance":
+            writeMessageToAllChannels("Veil will be down for maintenance");
+            break;
+
+        case "version":
+            message.channel.send("veil ultra: version: " + version.VERSION_RELEASE + "." + version.VERSION_MAJOR + "." + version.VERSION_MINOR)
+            break;
+    }
+
+    message.delete();
+}
+
 // Hourly state update
 function executeHourStateUpdate() {
     var currentHour = state.incrementHour();
@@ -139,11 +198,11 @@ const client = new Client()
 
 // General event handler
 client.on('message', (message) => {
-    //Catch self message case, a simple parrot and leave
+    // Catch self message case, a simple parrot and leave
     if (message.author == client.user) {
     }
 
-    //server text channel messages will be treated as expected
+    // Server text channel messages will be treated as expected
     else if (message.channel.type == 'text') {
         // Handle banned user
         if (state.isUserBanned(message.author.id)) {
@@ -153,7 +212,7 @@ client.on('message', (message) => {
         //otherwise handle commands and messages differently
         else {
             if (message.content.startsWith(state.cmdToken)) {
-                handleCommand(message);
+                handleChannelCommand(message);
             }
             else if (state.isChannelActive(message.channel)) {
                 if (state.isUserBanned(message.author)) {
@@ -170,7 +229,19 @@ client.on('message', (message) => {
             
         }
         
-    }    
+    }  
+    // Dm channels are managed different
+    else if (message.channel.type == 'dm') {
+        // Handle banned user
+        if (message.content.startsWith(state.cmdToken)) {
+            handleCommandDM(message);
+        }
+        else {
+            handleNonCommandDM(message);
+        }
+
+
+    }  
 })
 
 // Handles first load in
