@@ -157,12 +157,22 @@ function handleCommandDM(message) {
 
     switch (cmd) {
         case "proxy":
+            if (args.length == 1 ) {
+                console.length("length")
+            }
+            if (helper.isNaturalNumber(args[0])) {
+                console.length("nn")
+            }
+            if (Number(args[0]) < state.activeChannels.length) {
+                console.length("lengy")
+            }
             if (args.length == 1 && helper.isNaturalNumber(args[0]) && Number(args[0]) < state.activeChannels.length) {
                 state.usersProxyChannel.set(message.author.id, state.activeChannels[Number(args[0])]);
             }
             else {
                 message.channel.send("Invalid selection");
             }
+            break;
 
         case "changeid":
             state.resetID(message.author);
