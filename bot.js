@@ -134,14 +134,14 @@ function handleChannelCommand(message) {
 function handleNonCommandDM(message) {
     let proxyChannel = state.getUsersProxyChannel(message.user.id);
 
-    if (proxyChannel) {
-        obfuscateMessage(message, proxyChannel);
-    }
-    else {
+    if (proxyChannel == null) {
         message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
         for (var i = 0; i < state.activeChannels.length; i++) {
             message.channel.send("`" + i + "` : `" + client.channels.get(state.activeChannels[i]).name + "`");
         }
+    }
+    else {
+        obfuscateMessage(message, proxyChannel);
     }
 }
 
