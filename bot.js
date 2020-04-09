@@ -16,7 +16,8 @@ const { Client, MessageAttachment } = require('discord.js')
 // Obfuscates a given message, deleting the original
 // Message is the original message to be obfuscated
 // Channel is the channel to post the obfuscated message
-function obfuscateMessage(message, channel) {
+// if delete is true, the message will be deleted
+function obfuscateMessage(message, channel, deleteMessage) {
     var embeds = message.embeds;
     var attachments = message.attachments.array();
 
@@ -51,8 +52,11 @@ function obfuscateMessage(message, channel) {
         console.log("Image " + (i+1) + " of " + attachments.length + " posted by [REDACTED]")
     }
 
-    // Delete message
-    if (imagePromise) {
+    // Delete message if delete is true
+    if (!deleteMessage) {
+        // Pass
+    }
+    else if (imagePromise) {
         // If theres an image promise, require
         // waiting for image post before deleting
         imagePromise.then(
@@ -135,7 +139,7 @@ function handleNonCommandDM(message) {
     let proxyChannel = state.getUsersProxyChannel(message.author.id);
 
     if (proxyChannel) {
-        obfuscateMessage(message, client.channels.get(proxyChannel));
+        obfuscateMessage(message, client.channels.get(proxyChannel), false);
     }
     else {
         message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
@@ -222,7 +226,7 @@ client.on('message', (message) => {
                     message.delete();
                 } 
                 else {
-                    obfuscateMessage(message, message.channel);
+                    obfuscateMessage(message, message.channel, true);
                 }
                 
             }
