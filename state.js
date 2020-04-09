@@ -186,6 +186,7 @@ function getUsersProxyChannel(userID) {
     if (module.exports.usersProxyChannel.has(userID)) {
         return module.exports.usersProxyChannel.get(userID);
     }
+    return null;
 }
 
 module.exports.getUsersProxyChannel = getUsersProxyChannel;
