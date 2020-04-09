@@ -159,6 +159,7 @@ function handleCommandDM(message) {
         case "proxy":
             if (args.length == 2 && helper.isNaturalNumber(args[1]) && Number(args[1]) < state.activeChannels.length) {
                 state.usersProxyChannel.set(message.author.id, state.activeChannels[Number(args[1])]);
+                message.channel.send("Selection made: All posts here will be mirrored to selected challenge");
             }
             else {
                 message.channel.send("Invalid selection");
@@ -181,8 +182,6 @@ function handleCommandDM(message) {
             message.channel.send("veil ultra: version: " + version.VERSION_RELEASE + "." + version.VERSION_MAJOR + "." + version.VERSION_MINOR)
             break;
     }
-
-    message.delete();
 }
 
 // Hourly state update
