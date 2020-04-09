@@ -135,7 +135,7 @@ function handleNonCommandDM(message) {
     let proxyChannel = state.getUsersProxyChannel(message.author.id);
 
     if (proxyChannel) {
-        obfuscateMessage(message, proxyChannel);
+        obfuscateMessage(message, client.channels.get(proxyChannel));
     }
     else {
         message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
