@@ -8,6 +8,9 @@ var version = require("./version");
 // Import version number
 var helper = require("./helper");
 
+// Import version number
+var help_dialogue = require("./help_dialogue");
+
 // Import discord api
 const { Client, MessageAttachment } = require('discord.js')
 
@@ -189,6 +192,21 @@ function handleCommandDM(message) {
 
         case "channels":
             postAllProxyChannels(message);
+            break;
+
+        case "help":
+            var messageString = "";
+            if (args.length == 2) {
+                messageString = help_dialogue.getHelpKeyword(args[1])
+            }
+            else {
+                messageString = help_dialogue.getEmptyHelp()
+            }
+
+            if (messageString) {
+                message.channel.send(messageString);
+            }
+
             break;
 
         case "version":
