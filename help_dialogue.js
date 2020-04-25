@@ -10,7 +10,7 @@ var HELP_KEY_LOOKUP = {
 }
 
 // Generates a message when user asks for help with no keyword
-module.exports.getEmptyHelp = function {
+module.exports.getEmptyHelp = function() {
     var list = "```Veil: Anonymous posting bot \n Simply post in one of the tagged channels\n Further help can be found with %help keyword; with one of the following: \n";
     for (let [keyword, help] of module.exports.userToUUID) {
         list = list.concat(keyword + "; ")
@@ -19,7 +19,7 @@ module.exports.getEmptyHelp = function {
 
 // Returns message to post, given a keyword
 // returns false if keyword cannot be found
-module.exports.getHelpKeyword = function getHelpKeyword(keyword) {
+module.exports.getHelpKeyword = function(keyword) {
     if (!HELP_KEY_LOOKUP.has(keyword)) {
         return false;
     }
