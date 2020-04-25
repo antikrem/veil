@@ -15,6 +15,7 @@ module.exports.getEmptyHelp = function() {
     for (let keyword in HELP_KEY_LOOKUP) {
         list = list.concat(keyword + "; ")
     }
+    list = list.concat(keyword + "```")
     return list;
 }
 
