@@ -22,11 +22,11 @@ module.exports.getEmptyHelp = function() {
 // Returns message to post, given a keyword
 // returns false if keyword cannot be found
 module.exports.getHelpKeyword = function(keyword) {
-    if (!HELP_KEY_LOOKUP.has(keyword)) {
+    if (!HELP_KEY_LOOKUP.hasOwnProperty(keyword)) {
         return false;
     }
     else {
-        return HELP_KEY_LOOKUP.get(keyword);
+        return HELP_KEY_LOOKUP[keyword];
     }
 
 }
