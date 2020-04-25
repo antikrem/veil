@@ -11,7 +11,7 @@ var HELP_KEY_LOOKUP = {
 
 // Generates a message when user asks for help with no keyword
 module.exports.getEmptyHelp = function() {
-    var list = "```Veil: Anonymous posting bot \n Simply post in one of the tagged channels\n Further help can be found with %help keyword; with one of the following: \n";
+    var list = "\n```Veil: Anonymous posting bot \n Simply post in one of the tagged channels\n Further help can be found with %help keyword; with one of the following: \n";
     for (let keyword in HELP_KEY_LOOKUP) {
         list = list.concat(keyword + "; ")
     }
