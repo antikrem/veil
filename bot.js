@@ -134,6 +134,14 @@ function handleChannelCommand(message) {
     message.delete();
 }
 
+// Small dialogue to be sent when requesting a channel
+function postAllProxyChannels(message) {
+    message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
+    for (var i = 0; i < state.activeChannels.length; i++) {
+        message.channel.send("`" + i + "` : `" + client.channels.get(state.activeChannels[i]).name + "`");
+    }
+}
+
 // Handles a non-command dm to the bot
 function handleNonCommandDM(message) {
     let proxyChannel = state.getUsersProxyChannel(message.author.id);
@@ -142,10 +150,7 @@ function handleNonCommandDM(message) {
         obfuscateMessage(message, client.channels.get(proxyChannel), false);
     }
     else {
-        message.channel.send("Select a channel to post with `%proxy [index]`, choosing index:");
-        for (var i = 0; i < state.activeChannels.length; i++) {
-            message.channel.send("`" + i + "` : `" + client.channels.get(state.activeChannels[i]).name + "`");
-        }
+        postAllProxyChannels(message);
     }
 }
 
@@ -180,6 +185,10 @@ function handleCommandDM(message) {
 
         case "maintenance":
             writeMessageToAllChannels("Veil will be down for maintenance");
+            break;
+
+        case "channels":
+            postAllProxyChannels(message);
             break;
 
         case "version":
