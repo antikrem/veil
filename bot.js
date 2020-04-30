@@ -203,7 +203,7 @@ function handleCommandDM(message) {
 
         case "getrole":
             if (args.length == 2) {
-                message.channel.send(role_manage.addRole(message, args[1]));
+                message.channel.send(role_manage.addRole(client, message, args[1]));
             }
                 
             break;

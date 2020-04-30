@@ -24,13 +24,20 @@ module.exports.loadRoles = function() {
 
 // Adds role to given user
 // Returns string with message of success
-module.exports.addRole = function (message, roleName) {
+module.exports.addRole = function (client, message, roleName) {
     if (!roles.includes(roleName)) {
         return "Role not availible. Availible roles can be found with `%roles`";
     }
 
-    var role = message.guild.roles.find(role => role.name == roleName);
-    message.member.addRole(role);
+    // Iterate over each guild the bot manages
+    var guilds = client.guilds.cache.array();
+
+    for (var i = 0; i < guilds.length; i++) {
+        var role = guilds[i].roles.find(role => role.name == roleName);
+        var guildUser = guilds[i].members.cache.get(message.author.id);
+        guildUser.addRole(role);
+    }
+
     return "Role has been added";
 }
 
