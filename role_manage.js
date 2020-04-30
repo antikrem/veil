@@ -14,10 +14,11 @@ module.exports.loadRoles = function() {
         if (err) {
             return err;
         }
-        var text = data;
+        var text = data.toString();
         roles.push(
             ...text.split(',').map(s => s.trim())
         );
+        console.log(text);
     });
 }
 
