@@ -37,6 +37,7 @@ module.exports.addRole = function (message, roleName) {
 // Returns a list of roles as a message
 module.exports.getRoles = function () {
     var text = "Get a role with `%getrole role`, choosing a role from:\n";
+    console.log(roles.Length);
     for (var i = 0; i < roles.Length; i++) {
         text = text + "`" + roles[i] + "`; "; 
     }
