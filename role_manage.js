@@ -14,9 +14,9 @@ module.exports.loadRoles = function() {
         if (err) {
             return err;
         }
-
+        var text = data;
         roles.push(
-            ...data.split(',').map(s => s.trim())
+            ...text.split(',').map(s => s.trim())
         );
     });
 }
