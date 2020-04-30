@@ -22,13 +22,22 @@ module.exports.loadRoles = function() {
 }
 
 // Adds role to given user
-// Returns empty string on successs
-// Otherwise returns an error
+// Returns string with message of success
 module.exports.addRole = function (message, roleName) {
     if (!roles.includes(roleName)) {
-        return "Role not availible. Availible roles can be found with `%roles`.";
+        return "Role not availible. Availible roles can be found with `%roles`";
     }
 
     var role = message.guild.roles.find(role => role.name == roleName);
     message.member.addRole(role);
+    return "Role has been added";
+}
+
+// Returns a list of roles as a message
+module.exports.getRoles = function () {
+    var text = "Get a role with `%getrole role`, choosing a role from:\n";
+    for (var i = 0; i < roles.Length; i++) {
+        text = text + "`" + roles[i] + "`; "; 
+    }
+    return text;
 }

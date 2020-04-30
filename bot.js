@@ -8,8 +8,11 @@ var version = require("./version");
 // Import version number
 var helper = require("./helper");
 
-// Import version number
+// Import help dialogue
 var help_dialogue = require("./help_dialogue");
+
+// Import role_management module
+var role_manage = require("./role_manage")
 
 // Import discord api
 const { Client, MessageAttachment } = require('discord.js')
@@ -174,7 +177,7 @@ function handleCommandDM(message) {
                 message.channel.send("Selection made: All posts here will be mirrored to selected challenge");
             }
             else {
-                message.channel.send("Invalid selection");
+                message.channel.send("Invalid selection, use `%help proxy` for more info");
             }
             break;
 
@@ -192,6 +195,17 @@ function handleCommandDM(message) {
 
         case "channels":
             postAllProxyChannels(message);
+            break;
+
+        case "roles":
+            message.channel.send(role_manage.getRoles());
+            break;
+
+        case "getrole":
+            if (args.length == 2) {
+                message.channel.send(role_manage.addRole(message, args[1]));
+            }
+                
             break;
 
         case "help":
