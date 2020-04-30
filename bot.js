@@ -314,4 +314,6 @@ setInterval(
     60 * 60 * 1000
 );
 
+role_manage.loadRoles();
+
 client.login(state.getLoginToken())
