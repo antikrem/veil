@@ -35,7 +35,7 @@ module.exports.addRole = function (client, message, roleName) {
 
     for (var i = 0; i < guilds.length; i++) {
         var role = guilds[i].roles.find(role => role.name == roleName);
-        var guildUser = guilds[i].members.cache.get(message.author.id);
+        var guildUser = guilds[i].members.get(message.author.id);
         guildUser.addRole(role);
     }
 
