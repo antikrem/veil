@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 // default name of role file
-const ROLE_FILE = "roles.txt";
+const ROLE_FILE = "roles";
 
 // Keeps a list of roles that can be added with dm
 var roles = [];
