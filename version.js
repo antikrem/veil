@@ -2,4 +2,4 @@
 
 module.exports.VERSION_RELEASE = 0
 module.exports.VERSION_MAJOR = 3
-module.exports.VERSION_MINOR = 1
+module.exports.VERSION_MINOR = 2
