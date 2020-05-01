@@ -98,7 +98,7 @@ function handleChannelCommand(message) {
     let isMod = state.isUserMod(message.author);
     
     console.log("Cmd recieved: " + args);
-    console.log("idMod?: " + isMod);
+    console.log("isMod?: " + isMod);
     
     switch (cmd) {
         case "add" :
