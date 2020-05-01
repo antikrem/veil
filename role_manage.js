@@ -16,7 +16,7 @@ module.exports.loadRoles = function() {
         }
         var text = data.toString();
         roles.push(
-            ...text.split(',').map(s => s.trim())
+            ...text.split(',').map(s => s.trim().toLowerCase())
         );
         console.log(text);
     });
@@ -25,7 +25,7 @@ module.exports.loadRoles = function() {
 // Adds role to given user
 // Returns string with message of success
 module.exports.addRole = function (client, message, roleName) {
-    if (!roles.includes(roleName)) {
+    if (!roles.includes(roleName.toLowerCase())) {
         return "Role not availible. Availible roles can be found with `%roles`";
     }
 

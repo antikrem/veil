@@ -27,6 +27,8 @@ Follow the Windows equivalent of Linux installation.
 
 ## Release History
 * 0.3.2
+    * FIX: `roles` and `getroles` are case insensitive
+* 0.3.2
     * Added error message on invalid dm command
     * Added channels command
 * 0.3.1
