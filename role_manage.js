@@ -30,11 +30,10 @@ module.exports.addRole = function (client, message, roleName) {
     }
 
     // Iterate over each guild the bot manages
-    console.log(client.guilds)
     var guilds = client.guilds.array();
-
     for (var i = 0; i < guilds.length; i++) {
         var role = guilds[i].roles.find(role => role.name == roleName);
+        console.log(role)
         var guildUser = guilds[i].members.get(message.author.id);
         guildUser.addRole(role);
     }
@@ -45,7 +44,7 @@ module.exports.addRole = function (client, message, roleName) {
 // Returns a list of roles as a message
 module.exports.getRoles = function () {
     var text = "Get a role with `%getrole role`, choosing a role from:\n";
-    console.log(roles.length);
+
     for (var i = 0; i < roles.length; i++) {
         text = text + "`" + roles[i] + "`; "; 
     }
