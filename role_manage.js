@@ -30,6 +30,7 @@ module.exports.addRole = function (client, message, roleName) {
     }
 
     // Iterate over each guild the bot manages
+    console.log(client.guilds)
     var guilds = client.guilds.cache.array();
 
     for (var i = 0; i < guilds.length; i++) {

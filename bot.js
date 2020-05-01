@@ -226,6 +226,9 @@ function handleCommandDM(message) {
         case "version":
             message.channel.send("veil ultra: version: " + version.VERSION_RELEASE + "." + version.VERSION_MAJOR + "." + version.VERSION_MINOR)
             break;
+
+        default:
+            message.channel.send("Command not found, possible commands can be found with `%help`");
     }
 }
 
