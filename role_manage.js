@@ -31,7 +31,7 @@ module.exports.addRole = function (client, message, roleName) {
 
     // Iterate over each guild the bot manages
     console.log(client.guilds)
-    var guilds = client.guilds.cache.array();
+    var guilds = client.guilds.array();
 
     for (var i = 0; i < guilds.length; i++) {
         var role = guilds[i].roles.find(role => role.name == roleName);
