@@ -32,7 +32,13 @@ module.exports.addRole = function (client, message, roleName) {
     // Iterate over each guild the bot manages
     var guilds = client.guilds.array();
     for (var i = 0; i < guilds.length; i++) {
+        
+        // Check if user is in guild
         var guildUser = guilds[i].members.get(message.author.id);
+        if (!guildUser) {
+            continue;
+        }
+
         for (var j = 0; j < guilds[i].roles.array().length; j++) {
             if (guilds[i].roles.array()[j].name == roleName.trim()) {
                 guildUser.addRole(guilds[i].roles.array()[j].id);
