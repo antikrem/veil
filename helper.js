@@ -1,5 +1,6 @@
 // Stores some functions for general help
 var fs = require('fs');
+var path = require('path');
 
 // Checks if string is a natural number
 function isNaturalNumber(s) {
@@ -10,11 +11,7 @@ module.exports.isNaturalNumber = isNaturalNumber;
 
 function get_random_file_from_folder(folder) 
 {
-    fs.readdirSync(folder).forEach(file => {
-        console.log(file);
-      });
-
-    return "helper.js";
+    return path.join(folder, fs.readdirSync(folder)[Math.floor(Math.random() * array.length)]);
 }
 
 module.exports.get_random_file_from_folder = get_random_file_from_folder;
