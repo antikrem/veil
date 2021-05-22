@@ -97,7 +97,7 @@ function writeMessageToAllChannels(messageString) {
 function memeDrop(channel)
 {
     var folder = state.get_meme_folder();
-    var file = get_random_file_from_folder(folder);
+    var file = helper.get_random_file_from_folder(folder);
     channel.send({files: [file]})
 }
 
