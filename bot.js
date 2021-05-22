@@ -96,7 +96,9 @@ function writeMessageToAllChannels(messageString) {
 
 function memeDrop(channel)
 {
-    channel.send({files: ['helper.js']})
+    var folder = state.get_meme_folder();
+    var file = get_random_file_from_folder(folder);
+    channel.send({files: [file]})
 }
 
 // Handles a command message posted in a channel

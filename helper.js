@@ -13,6 +13,8 @@ function get_random_file_from_folder(folder)
     fs.readdirSync(folder).forEach(file => {
         console.log(file);
       });
+
+    return "helper.js";
 }
 
 module.exports.get_random_file_from_folder = get_random_file_from_folder;
