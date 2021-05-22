@@ -96,7 +96,7 @@ function writeMessageToAllChannels(messageString) {
 
 function memeDrop(channel)
 {
-    channel.send(new MessageAttachment('helper.js'));
+    channel.send({files: ['helper.js']})
 }
 
 // Handles a command message posted in a channel
