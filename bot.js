@@ -21,7 +21,7 @@ const { Client, MessageAttachment } = require('discord.js')
 function postMessage(textBody, channel, attachment) {
     console.log(textBody);
 
-    if (attachment)
+    if (attachment != null)
         return channel.send(textBody, {file: attachment});
     else
         return channel.send(textBody);
@@ -63,7 +63,7 @@ function obfuscateMessage(message, channel, deleteMessage) {
     for (var i = 0; i < attachmentUrls.length; i++) {
         var UUID = state.generateUUID();
         state.imageUUIDToPoster.set(UUID, message.author.id);
-        promises.push(postMessage("`ID: " + UUID + "`\n", attachmentUrls[i]))
+        promises.push(postMessage("`ID: " + UUID + "`\n", channel, attachmentUrls[i]))
     }
 
     // Delete message if delete is true
