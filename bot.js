@@ -18,6 +18,16 @@ var role_manage = require("./role_manage")
 const { Client, MessageAttachment } = require('discord.js')
 
 // Functional components
+function postMessage(textBody, channel, attachment) {
+    console.log(textBody);
+
+    if (attachment)
+        return channel.send(textBody, {file: attachment});
+    else
+        return channel.send(textBody);
+
+}
+
 
 // Obfuscates a given message, deleting the original
 // Message is the original message to be obfuscated
@@ -47,38 +57,28 @@ function obfuscateMessage(message, channel, deleteMessage) {
     // Handle attachments  
     var attachmentUrls = attachments.map(m => m.url);
     
-    var imagePromise = null;
+    var promises = [];
 
     // Post each image, which requires image urls to be valid
     for (var i = 0; i < attachmentUrls.length; i++) {
         var UUID = state.generateUUID();
         state.imageUUIDToPoster.set(UUID, message.author.id);
-        imagePromise = channel.send("`ID: " + UUID + "`\n", {file: attachmentUrls[i]});
-        console.log("Image posted");
-        console.log("Image " + (i+1) + " of " + attachments.length + " posted by [REDACTED]")
+        promises.push(postMessage("`ID: " + UUID + "`\n", attachmentUrls[i]))
     }
 
     // Delete message if delete is true
     if (!deleteMessage) {
         // Pass
     }
-    else if (imagePromise) {
+    else {
         // If theres an image promise, require
         // waiting for image post before deleting
-        imagePromise.then(
-            function(value) {
-                message.delete();
-            }
-        );
+        await Promise.all(promises);
     }
-    else {
-        message.delete();
-    }
-    
+
     // If there is a some text to post, send it
     if (textBody != "") {
-        channel.send(textBody);
-        console.log(textBody)
+        postMessage(textBody, channel, null);
     }   
 }
 
