@@ -73,7 +73,11 @@ function obfuscateMessage(message, channel, deleteMessage) {
     else {
         // If theres an image promise, require
         // waiting for image post before deleting
-        await Promise.all(promises);
+        Promise.all(promises).then(
+            function(_) {
+                message.delete();
+            }
+        );
     }
 
     // If there is a some text to post, send it
