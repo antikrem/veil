@@ -11,7 +11,8 @@ module.exports.isNaturalNumber = isNaturalNumber;
 
 function get_random_file_from_folder(folder) 
 {
-    return path.join(folder, fs.readdirSync(folder)[Math.floor(Math.random() * array.length)]);
+    var images = fs.readdirSync(folder);
+    return path.join(folder, images[Math.floor(Math.random() * images.length)]);
 }
 
 module.exports.get_random_file_from_folder = get_random_file_from_folder;
