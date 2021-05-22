@@ -94,6 +94,11 @@ function writeMessageToAllChannels(messageString) {
     }
 }
 
+function memeDrop(channel)
+{
+    channel.SendFileAsync("helper.js","Test");
+}
+
 // Handles a command message posted in a channel
 function handleChannelCommand(message) {
     let args = message.content.substr(1).split(" ");
@@ -134,6 +139,10 @@ function handleChannelCommand(message) {
 
         case "maintenance":
             writeMessageToAllChannels("Veil will be down for maintenance");
+            break;
+
+        case "9gag":
+            memeDrop(message.channel);
             break;
 
         case "version":
