@@ -190,3 +190,9 @@ function getUsersProxyChannel(userID) {
 }
 
 module.exports.getUsersProxyChannel = getUsersProxyChannel;
+
+function get_meme_folder() {
+    return "memes/";
+}
+
+module.exports.get_meme_folder = get_meme_folder;
