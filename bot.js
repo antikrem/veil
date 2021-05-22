@@ -21,7 +21,7 @@ const { Client, MessageAttachment } = require('discord.js')
 function postMessage(textBody, channel, attachment) {
     console.log(textBody);
 
-    if (attachment)
+    if (attachment != null)
         return channel.send(textBody, {file: attachment});
     else
         return channel.send(textBody);
